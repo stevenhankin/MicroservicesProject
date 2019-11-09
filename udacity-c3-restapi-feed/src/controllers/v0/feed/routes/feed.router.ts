@@ -92,7 +92,7 @@ router.post('/',
     const saved_item = await item.save();
 
     saved_item.url = AWS.getGetSignedUrl(saved_item.url);
-    res.status(201).send(saved_item);
+    return res.status(201).send(saved_item);
 });
 
 export const FeedRouter: Router = router;
