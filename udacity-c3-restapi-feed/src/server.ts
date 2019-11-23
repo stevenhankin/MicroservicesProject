@@ -15,11 +15,12 @@ const c = config.dev;
 
   const app = express();
   const port = process.env.PORT || 8080; // default port to listen
-  
+
   app.use(bodyParser.json());
 
   //CORS Should be restricted
-  app.use(function(req, res, next) {
+  app.use(function (req, res, next) {
+    console.log('** here!')
     res.header("Access-Control-Allow-Origin", c.url);
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
@@ -28,14 +29,15 @@ const c = config.dev;
   app.use('/api/v0/', IndexRouter)
 
   // Root URI call
-  app.get( "/", async ( req, res ) => {
-    res.send( "/api/v0/" );
-  } );
-  
+  app.get("/", async (req, res) => {
+    res.send("/api/v0/");
+  });
+
 
   // Start the Server
-  app.listen( port, () => {
-      console.log( `server running ` + c.url );
-      console.log( `press CTRL+C to stop server` );
-  } );
+  app.listen(port, () => {
+    console.log('Service listening on port', port)
+    console.log(`will accept requests from front-end server on running ` + c.url);
+    console.log(`press CTRL+C to stop server`);
+  });
 })();

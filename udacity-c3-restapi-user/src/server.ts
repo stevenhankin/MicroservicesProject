@@ -18,8 +18,11 @@ const c = config.dev;
   
   app.use(bodyParser.json());
 
+
   //CORS Should be restricted
   app.use(function(req, res, next) {
+    console.error('HERE******')
+    console.log('Setting Access-Control-Allow-Origin',c.url)
     res.header("Access-Control-Allow-Origin", c.url);
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
@@ -35,7 +38,8 @@ const c = config.dev;
 
   // Start the Server
   app.listen( port, () => {
-      console.log( `server running ` + c.url );
+      console.log('Service listening on port',port)
+      console.log( `will accept requests from front-end server on running ` + c.url );
       console.log( `press CTRL+C to stop server` );
   } );
 })();
