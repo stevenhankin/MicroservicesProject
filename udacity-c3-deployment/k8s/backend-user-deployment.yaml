@@ -13,9 +13,11 @@ spec:
         service: backend-user
     spec:
       containers:
-      - image: scheele/udacity-restapi-user
+      - image: biggyboss/udacity-restapi-user
         name: backend-user 
         imagePullPolicy: Always  
+        ports:
+        - containerPort: 8080
         resources:
           requests:
             memory: "64Mi"
