@@ -3,7 +3,7 @@ kind: ConfigMap
 data:
   AWS_BUCKET: "steves-fs-dev"
   AWS_PROFILE: "default"
-  AWS_REGION: "eu-west-2a"
+  AWS_REGION: "eu-west-2"
   JWT_SECRET: "3468793474365432"
   POSTGRESS_DB: "udagramstevedev"
   POSTGRESS_HOST: "udagramstevedev.c6gqmqzlmiij.eu-west-2.rds.amazonaws.com"

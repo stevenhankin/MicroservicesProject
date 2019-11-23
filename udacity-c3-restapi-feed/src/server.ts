@@ -10,9 +10,11 @@ import { V0MODELS } from './controllers/v0/model.index';
 const c = config.dev;
 
 (async () => {
+  console.log('Configuring sequelize..')
   await sequelize.addModels(V0MODELS);
   await sequelize.sync();
 
+  console.log('Starting express..')
   const app = express();
   const port = process.env.PORT || 8080; // default port to listen
 
@@ -37,7 +39,7 @@ const c = config.dev;
   // Start the Server
   app.listen(port, () => {
     console.log('Service listening on port', port)
-    console.log(`will accept requests from front-end server on running ` + c.url);
+    console.log(`(will accept requests from front-end server on running ${c.url})` );
     console.log(`press CTRL+C to stop server`);
   });
 })();

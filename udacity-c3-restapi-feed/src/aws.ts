@@ -13,14 +13,16 @@ export const s3 = new AWS.S3({
   params: { Bucket: c.aws_media_bucket }
 });
 
-  // Call S3 to list the buckets
-  s3.listBuckets(function (err, data) {
-    if (err) {
-      console.log("Error", err);
-    } else {
-      console.log("Success", data.Buckets);
-    }
-  });
+console.log('Listing S3 Buckets...')
+// Call S3 to list the buckets
+s3.listBuckets(function (err, data) {
+  if (err) {
+    console.log('Error', err);
+    console.log(`Failed to connect to region ${c.aws_reigion}, bucket ${c.aws_media_bucket}`, err);
+  } else {
+    console.log("Success", data.Buckets);
+  }
+});
 
 
 /* getGetSignedUrl generates an aws signed url to retreive an item
