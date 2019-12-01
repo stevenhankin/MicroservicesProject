@@ -31,7 +31,7 @@ http://steve-fs-dev.s3-eu-west-2a.amazonaws.com
 First, create a new cluster:
 ```
 eksctl create cluster \
---name cluster-uda \
+--name cluster-udagram \
 --version 1.14 \
 --region eu-west-2 \
 --nodegroup-name standard-workers \
