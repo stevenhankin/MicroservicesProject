@@ -28,9 +28,10 @@ http://steve-fs-dev.s3-eu-west-2a.amazonaws.com
 
 
 ## Cluster Setup (EKS)
+First, create a new cluster:
 ```
 eksctl create cluster \
---name cluster-dev \
+--name cluster-uda \
 --version 1.14 \
 --region eu-west-2 \
 --nodegroup-name standard-workers \
@@ -40,7 +41,10 @@ eksctl create cluster \
 --nodes-max 4 \
 --node-ami auto
 ```
-
+Then configure your kubectl client to 
+```
+#aws eks --region eu-west-2 update-kubeconfig --name cluster-dev
+```
 
 
 ## Build Docker images and start using Docker Compose
@@ -89,7 +93,7 @@ kubectl apply -f reverseproxy-deployment.yaml
 Need to do this to avoid unexpected charges
 #### Delete cluster
 ```
-kubectl delete daemonsets,replicasets,services,deployments,pods,rc --all
+kubectl delete daemonsets,replicasets,services,deployments,pods,rc   #maybe don't do --all
 ```
 #### Shutdown database
 aws rds stop-db-instance --db-instance-identifier udagramstevedev
