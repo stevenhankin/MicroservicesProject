@@ -13,4 +13,4 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
-  - echo `hello udacity`
+  - docker-compose -f udacity-c3-deployment/docker/docker-compose-build.yaml build --parallel
