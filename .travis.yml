@@ -4,7 +4,7 @@ services:
   - docker
 
 env:
-  - DOCKER_COMPOSE_VERSION=1.23.2
+  - DOCKER_COMPOSE_VERSION=1.24.1
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose
@@ -13,6 +13,4 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
-  - docker-compose build
-  - docker-compose run test
-
+  - echo `hello udacity`

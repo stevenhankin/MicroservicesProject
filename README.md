@@ -41,6 +41,20 @@ eksctl create cluster \
 --node-ami auto
 ```
 
+
+
+## Build Docker images and start using Docker Compose
+cd MicroservicesProject/udacity-c3-restapi-user
+docker build . -t biggyboss/udacity-restapi-user
+
+cd /MicroservicesProject/udacity-c3-frontend
+docker build . -t biggyboss/udacity-frontend
+
+cd MicroservicesProject/udacity-c3-deployment/docker
+docker-compose up
+
+
+
 ## Deployment
 Publish deployments and services to cluster
 
@@ -71,7 +85,13 @@ kubectl apply -f reverseproxy-deployment.yaml
 
 
 
-## Delete pods
+## Shutdown of services when not in use
+Need to do this to avoid unexpected charges
+#### Delete cluster
 ```
 kubectl delete daemonsets,replicasets,services,deployments,pods,rc --all
 ```
+#### Shutdown database
+aws rds stop-db-instance --db-instance-identifier udagramstevedev
+
+

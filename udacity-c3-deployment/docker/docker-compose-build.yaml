@@ -15,4 +15,4 @@ services:
   frontend:
     build:
       context: ../../udacity-c3-frontend  
-    image: biggyboss/udacity-frontend:local
+    image: biggyboss/udacity-frontend
