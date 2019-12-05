@@ -12,6 +12,7 @@ This example runs on Amazons Elastic Kubernetes service
 * eksctl 0.9.0
 
 
+
 ## Local Installation
 Setup environment variables for configuring containers to connect to PostGres RDS (which must be pre-configured and running on AWS):
 ```
@@ -81,6 +82,11 @@ credentials are not checked into public github:
 sed  "s/___.*/`cat ~/.aws/credentials | base64 -`/" aws-secret.yaml | kubectl apply -f -
 ```
 
+Start RDS service:
+```
+aws rds start-db-instance --db-instance-identifier udagramstevedev
+```
+
 Deploy the config / containers / services:
 ```Shell
 kubectl apply -f env-configmap.yaml 
@@ -114,6 +120,22 @@ Need to do this once testing is finished to avoid unexpected charges! 😭
 kubectl delete daemonsets,replicasets,services,deployments,pods,rc   #maybe don't do --all
 ```
 #### Shutdown database
+```
 aws rds stop-db-instance --db-instance-identifier udagramstevedev
+```
 
+
+## Screenshots
+
+#### Kubectl CLI
+![Image](screenshots/kubectl.png)
+
+#### Travis Build History
+![Image](screenshots/travis-build-history.png)
+
+#### Travis Build Log
+![Image](screenshots/build-log-1.png)
+![Image](screenshots/build-log-2.png)
+![Image](screenshots/build-log-3.png)
+![Image](screenshots/build-log-4.png)
 
