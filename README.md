@@ -1,9 +1,19 @@
-# MicroservicesProject
+# Microservices Project
+
+This project demonstrates the setup of application components as 
+microservices (with separated concerns) running on a Cloud Infrastructure
+
+This example runs on Amazons Elastic Kubernetes service
+
+## Requirements
+* Docker Desktop
+* aws cli 1.16.257+
+* kubectl 1.14.8
+* eksctl 0.9.0
 
 
-
-## Installation
-Setup environment variables for configuring containers to connect to PostGres RDS (which must be pre-configured and running on AWS)
+## Local Installation
+Setup environment variables for configuring containers to connect to PostGres RDS (which must be pre-configured and running on AWS):
 ```
 export POSTGRESS_USERNAME="udagramstevedev"
 export POSTGRESS_PASSWORD="rkr1KFnaN3665NeHFgZ4"
@@ -14,24 +24,21 @@ export AWS_PROFILE="default"
 export AWS_BUCKET="steves-fs-dev"
 export JWT_SECRET="3468793474365432"
 ```
-
+Now launch the multi-container Docker application:
 ```
 cd udacity-c3-deployment/docker
 docker-compose -f docker-compose-build.yaml build --parallel
 docker-compose -f docker-compose-build.yaml push
 docker-compose up
 ```
-
-
-http://steve-bucket-project-1.s3-eu-west-2a.amazonaws.com
-http://steve-fs-dev.s3-eu-west-2a.amazonaws.com
+It should now be running as a local Docker Application
 
 
 ## Cluster Setup (EKS)
 First, create a new cluster:
 ```
 eksctl create cluster \
---name cluster-udagram \
+--name cluster-udagram-6-dec \
 --version 1.14 \
 --region eu-west-2 \
 --nodegroup-name standard-workers \
@@ -87,10 +94,21 @@ kubectl apply -f frontend-deployment.yaml
 kubectl apply -f reverseproxy-deployment.yaml 
 ```
 
+Also apply the env secret (which I've put above and outside of the Git Repo)
+```
+kubectl apply -f ../../../env-secret.yaml 
+```
+
+Once it is running, check the current service:
+```Shell
+kubectl get svc frontend
+```
+
+The External-IP can be used in a browser, with port :8100 appended to access the Front End 👏🏻
 
 
 ## Shutdown of services when not in use
-Need to do this to avoid unexpected charges
+Need to do this once testing is finished to avoid unexpected charges! 😭
 #### Delete cluster
 ```
 kubectl delete daemonsets,replicasets,services,deployments,pods,rc   #maybe don't do --all
