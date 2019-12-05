@@ -117,7 +117,8 @@ The External-IP can be used in a browser, with port :8100 appended to access the
 Need to do this once testing is finished to avoid unexpected charges! 😭
 #### Delete cluster
 ```
-kubectl delete daemonsets,replicasets,services,deployments,pods,rc   #maybe don't do --all
+kubectl delete deployment --all
+kubectl delete svc backend-feed backend-user frontend reverseproxy
 ```
 #### Shutdown database
 ```
